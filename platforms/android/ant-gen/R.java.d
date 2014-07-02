@@ -14,4 +14,17 @@ D:\projects\battery\platforms\android\res\drawable-port-xhdpi\screen.png \
 D:\projects\battery\platforms\android\res\drawable-xhdpi\icon.png \
 D:\projects\battery\platforms\android\res\values\strings.xml \
 D:\projects\battery\platforms\android\res\xml\config.xml \
+D:\projects\battery\platforms\android\ant-build\res\drawable\icon.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-hdpi\icon.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-land-hdpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-land-ldpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-land-mdpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-land-xhdpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-ldpi\icon.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-mdpi\icon.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-port-hdpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-port-ldpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-port-mdpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-port-xhdpi\screen.png \
+D:\projects\battery\platforms\android\ant-build\res\drawable-xhdpi\icon.png \
 D:\projects\battery\platforms\android\ant-build\AndroidManifest.xml \
