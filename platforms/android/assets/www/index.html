@@ -18,12 +18,99 @@
         <title>调试页面</title>
     </head>
     <body>
+        <div data-role="page" data-control-title="Home" id="index">
+            <div data-theme="a" data-role="header">
+                <h1 class="ui-title">
+                    电池健康状态
+                </h1>
+            </div>
+            <div id='batteries' role="main" class="ui-content">
+            </div>
+            <script  type="text/html" id="battery_in_index_template">
+                <div class="battery ui-grid-a">
+                    <div class="ui-block-a">
+                        <div data-controltype="image">
+                            <img src="icon.png">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-field-contain name">
+                            <span data-content="name"></span>
+                        </div>
+                        <div class="ui-field-contain">
+                            电量：<span data-content="eq"></span>%
+                        </div>
+                        <div class="ui-field-contain">
+                            健康：<span data-content="soh"></span>%
+                        </div>
+                        <div class="ui-field-contain">
+                            循环：<b data-content="cc"></b>次
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <script type="text/javascript">
+                $bs = [{
+                    name: '1号',
+                    eq: 80,
+                    soh: 98,
+                    cc: 12
+                },{
+                    name: '2号',
+                    eq: 70,
+                    soh: 88,
+                    cc: 13
+                },{
+                    name: '3号',
+                    eq: 90,
+                    soh: 97,
+                    cc: 12
+                },{
+                    name: '4号',
+                    eq: 95,
+                    soh: 95,
+                    cc: 13
+                },{
+                    name: '5号',
+                    eq: 98,
+                    soh: 90,
+                    cc: 15
+                },{
+                    name: '6号',
+                    eq: 100,
+                    soh: 99,
+                    cc: 3
+                },{
+                    name: '7号',
+                    eq: 60,
+                    soh: 75,
+                    cc: 50
+                },{
+                    name: '8号',
+                    eq: 99,
+                    soh: 99,
+                    cc: 3
+                },{
+                    name: '9号',
+                    eq: 75,
+                    soh: 88,
+                    cc: 5
+                },{
+                    name: '10号',
+                    eq: 55,
+                    soh: 67,
+                    cc: 200
+                }];
+                $("#batteries").loadTemplate($("#battery_in_index_template"), $bs);
+                
+            </script>
+        </div>            
         <div data-role="page" data-control-title="Home" id="show">
             <div data-theme="a" data-role="header">
                 <h1 class="ui-title">
-                    1号电池状态
+                    1号电池健康状态
                 </h1>
-                <a href="setting.html" data-iconpos="left" class="ui-btn ui-icon-bullets ui-btn-icon-notext ui-corner-all ui-btn-right" rel='external'>
+                <a href="#index" data-iconpos="left" class="ui-btn ui-icon-bullets ui-btn-icon-notext ui-corner-all ui-btn-right">
                     设置
                 </a>
             </div>
@@ -82,64 +169,6 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
-                var on_success = function(position) {                    
-                    log('显示车辆所在地址')
-                    try{
-                        $current_address(position,function(address,position) {
-                            if(address.length > 0) {
-                                $('#current_address').html(address);    
-                            } else {
-                                $('#current_address').html(position.coords.longitude+","+position.coords.latitude);
-                            }                            
-                            log('同步车辆位置:' + position.coords.longitude+","+position.coords.latitude);
-                            $.get("http://mytusi.com/proxys/userjwd/lorrynet", {
-                                    username: $current_user.username,
-                                    md5uname: $current_user.md5uname,
-                                    jingdu: position.coords.longitude,
-                                    weidu:position.coords.latitude,
-                                    address: $('#current_address').html()
-                                },function(xml) {
-                                    var result =  $.xml2json(xml)
-                                    if(result == 'jwdsucceed') {
-                                        log('同步车辆位置成功')
-                                    } else {
-                                        log('同步车辆位置失败')
-                                    }
-                            })
-                        })    
-                    }catch(e) {
-                        log('显示车辆所在地址失败：' + e);
-                        $('#current_address').html('系统繁忙，暂时无法获取地址信息，请稍后');  
-                    }                                        
-                }
-
-                function on_error(error) {                        
-                    log('获取车辆位置失败：' + '  code: '    + error.code    + '\n' +
-                          'message: ' + error.message + '\n');
-                    $('#current_address').html('系统繁忙，暂时无法获取车辆位置，请稍后');  
-                }
-
-                $gps(on_success,on_error);
-
-                $('#login_out').on('tap',function() {
-                    $loading();
-                    $.get("http://www.lorrynet.cn/anz/exitlogin.php?", {
-                            username: $current_user.username,
-                            md5uname: $current_user.md5uname,
-                        }, function(xml) {
-                            $hide_loading();
-                            var result =  $.xml2json(xml)
-                            if(result == 'exitloginsucceed') {
-                                $db.remove('sessions.current');
-                                window.location.href = 'sessions.html';
-                            } else {
-                                alert($en2zh[result])
-                            }
-
-                    })
-                })
-            </script>
         </div>
     </body>
 </html>    
